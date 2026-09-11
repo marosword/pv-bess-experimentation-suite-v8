@@ -5,7 +5,7 @@ root=$(CDPATH= cd -P "$(dirname "$0")" && pwd)
 parent=$(dirname "$root")
 package=$(basename "$root")
 output="$root/output"
-workers=4 #change, machine dependent
+workers=4
 smoke=
 
 while [ "$#" -gt 0 ]; do
@@ -17,18 +17,27 @@ while [ "$#" -gt 0 ]; do
         --smoke)
             smoke=--smoke; shift ;;
         *)
-            echo "usage: $0 [--output PATH] [--workers N] [--smoke]" >&2; exit 2 ;;
+            echo "usage: $0 [--output PATH] [--workers N] [--smoke]" >&2
+            exit 2 ;;
     esac
 done
 
 case "$workers" in
-    ''|*[!0-9]*) echo "--workers must be a positive integer" >&2; exit 2 ;;
+    ''|*[!0-9]*)
+        echo "--workers must be a positive integer" >&2
+        exit 2 ;;
 esac
-[ "$workers" -gt 0 ] || { echo "--workers must be a positive integer" >&2; exit 2; }
+
+[ "$workers" -gt 0 ] || {
+    echo "--workers must be a positive integer" >&2
+    exit 2
+}
 [ -z "$smoke" ] || workers=1
 
 if [ -n "${PYTHON:-}" ]; then
     python=$PYTHON
+elif [ -x "$root/.venv/bin/python" ]; then
+    python="$root/.venv/bin/python"
 elif [ -x "$parent/.venv/bin/python" ]; then
     python="$parent/.venv/bin/python"
 else
@@ -46,7 +55,6 @@ export PYTHONNOUSERSITE=1
 export PYTHONDONTWRITEBYTECODE=1
 export PYTHONPATH="$root:$parent${PYTHONPATH:+:$PYTHONPATH}"
 
-mkdir -p "$output"
 logs="$output/logs"
 mkdir -p "$logs"
 
@@ -71,5 +79,8 @@ for pid in $pids; do
     fi
 done
 
-[ "$failed" -eq 0 ] || { echo "experiment failed; see $logs" >&2; exit 1; }
+[ "$failed" -eq 0 ] || {
+    echo "experiment failed; see $logs" >&2
+    exit 1
+}
 echo "experiment complete: $output"
