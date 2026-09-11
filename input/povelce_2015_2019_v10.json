@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "sampling": {
+    "method": "sha256_ranked_calendar_days_v1",
+    "seed": "pv-bess-mission-criticality-definitive-v8",
+    "days_per_month": 5,
+    "estimand": "equal_month",
+    "common_terminal_hours": 24,
+    "source_missing_policy": {
+      "policy_id": "exclude_source_missing_quality_footprint_v1",
+      "lookback_hours": 23,
+      "forward_hours": 48,
+      "circular_lookback": true
+    }
+  },
+  "site_years": [
+    {
+      "site_year_id": "povelce_2015",
+      "location_id": "povelce",
+      "expected_year": 2015,
+      "expected_latitude": 40.73359591755215,
+      "expected_longitude": 19.437023344892737,
+      "expected_ninja_settings": {
+        "dataset": "sarah",
+        "capacity_kw": 1.0,
+        "system_loss": 0.1,
+        "tracking": 0,
+        "tilt_degrees": 35.0,
+        "azimuth_degrees": 180.0,
+        "local_time": false,
+        "header": true,
+        "raw": true,
+        "source_missing_column": "binary_required"
+      },
+      "source": "povelce_2015_sarah.csv"
+    },
+    {
+      "site_year_id": "povelce_2019",
+      "location_id": "povelce",
+      "expected_year": 2019,
+      "expected_latitude": 40.73359591755215,
+      "expected_longitude": 19.437023344892737,
+      "expected_ninja_settings": {
+        "dataset": "merra2",
+        "capacity_kw": 1.0,
+        "system_loss": 0.1,
+        "tracking": 0,
+        "tilt_degrees": 35.0,
+        "azimuth_degrees": 180.0,
+        "local_time": false,
+        "header": true,
+        "raw": true,
+        "source_missing_column": "allow_absent_as_no_observed_flags"
+      },
+      "source": "povelce_2019_merra2.csv"
+    }
+  ]
+}

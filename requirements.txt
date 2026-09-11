@@ -1,0 +1,7 @@
+--only-binary=:all:
+--require-hashes
+numpy==2.5.1 --hash=sha256:efd736408cc97c79b9e6917338dfc8f06013b2274f992e96b1d9a81a71e2a2c2
+python-sat==1.9.dev7 --hash=sha256:ba393aa800afe098ebc0e4c7e58a5b1d98a9e207fe0f20b056c373b852f1c55a
+scipy==1.18.0 --hash=sha256:f2a6af57bd9e4a75d70e4117e78a1bbee84f79ae3fbb6d0111005d6ebcc4cb8d
+six==1.17.0 --hash=sha256:4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274
+#keep hashes for portabilitu
